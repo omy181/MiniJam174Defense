@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Start()
     {
         InputManager.Instance.OnPressF += _interract;
+        InputManager.Instance.OnUnPressF += _stopInterract;
     }
     void Update()
     {
@@ -34,6 +35,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void _interract()
     {
-        if (_seenInteractable != null) _seenInteractable.Interract(_player);
+        if (_seenInteractable != null && _seenInteractable.IsInteractable(_player)) _seenInteractable.Interract(_player);
+    }
+
+    private void _stopInterract()
+    {
+        if (_seenInteractable != null) _seenInteractable.StopInterract(_player);
     }
 }

@@ -103,4 +103,13 @@ public class Wheel : MonoBehaviour, Interactable
         _playerDir[PlayerManager.instance.LocalePlayer] += 1;
     }
 
+    public void StopInterract(Player player)
+    {
+        
+    }
+
+    public bool IsInteractable(Player player)
+    {
+        return true;
+    }
 }
