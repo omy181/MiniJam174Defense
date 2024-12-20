@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1585463538020490525}
   - component: {fileID: 3976420306939273783}
-  - component: {fileID: 268178047377900344}
   m_Layer: 0
   m_Name: Plug
   m_TagString: Untagged
@@ -55,18 +54,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4018682, y: 1.003146, z: 0.8687501}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &268178047377900344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2664004114747685008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc957e5e1963494a8958a9e60eab339, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5682552045197886822
 GameObject:
   m_ObjectHideFlags: 0
