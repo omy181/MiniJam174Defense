@@ -21,7 +21,12 @@ public class Wheel : MonoBehaviour, Interactable
 
         if (_dir == 0)
         {
-            _snap();
+            var angle = _snap();
+            DeviceManager.instance.PowerOnDeviceByAngle((int)angle);
+        }
+        else
+        {
+            DeviceManager.instance.PowerOnDeviceByAngle(-1);
         }
     }
 
@@ -29,27 +34,32 @@ public class Wheel : MonoBehaviour, Interactable
     {
         if (_dir == 0) return;
 
-        var forcePower = Mathf.Sign(_dir) * _speed * _playerCount / PlayerManager.instance.PlayerCount;
+        var forcePower = Mathf.Sign(_dir) * _speed * _playerCount * Time.deltaTime / PlayerManager.instance.PlayerCount;
 
         transform.Rotate(Vector3.forward, forcePower);
     }
 
-    private void _snap()
+    private float _snap()
     {
         float currentZRotation = transform.rotation.eulerAngles.y;
 
-        float nearestMultipleOf45 = Mathf.Round(currentZRotation / 30f) * 30f;
-        if (nearestMultipleOf45 < 0)
+        float nearestMultiple = Mathf.Round(currentZRotation / 30f) * 30f;
+        if (nearestMultiple < 0)
         {
-            nearestMultipleOf45 += 360f;
+            nearestMultiple += 360f;
         }
 
-        if (Mathf.Abs(currentZRotation - nearestMultipleOf45) <= 5f)
+        if (Mathf.Abs(currentZRotation - nearestMultiple) <= 5f)
         {
-            Vector3 newRotation = new Vector3(transform.rotation.eulerAngles.x, nearestMultipleOf45, transform.rotation.eulerAngles.z);
+            Vector3 newRotation = new Vector3(transform.rotation.eulerAngles.x, nearestMultiple, transform.rotation.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newRotation);
+
+            return nearestMultiple;
         }
+
+        return -1;
     }
+
 
     public void Interract(Player player)
     {

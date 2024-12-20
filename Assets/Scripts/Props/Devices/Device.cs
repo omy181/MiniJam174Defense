@@ -5,6 +5,11 @@ using UnityEngine;
 public abstract class Device : MonoBehaviour
 {
     private bool _power;
+
+    private void Start()
+    {
+        PowerOff();
+    }
     private void Update()
     {
         if(_power)
@@ -15,13 +20,16 @@ public abstract class Device : MonoBehaviour
     public void PowerOn()
     {
         _power = true;
+        _onPowerOn();
     }
+
+    protected abstract void _onPowerOn();
 
     public void PowerOff()
     {
         _power = false;
+        _onPowerOff();
     }
 
-
-    //              device secmek icin collision kullanma, onun yerine bir dictionaryde her aci icin bir device olsun, snaplendiginde o device acilsin
+    protected abstract void _onPowerOff();
 }
