@@ -17,6 +17,6 @@ public class ThrusterDevice : Device
 
     protected override void _run()
     {
-
+        ShipManager.instance.RunShip();
     }
 }

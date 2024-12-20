@@ -17,6 +17,6 @@ public class HeaterDevice : Device
 
     protected override void _run()
     {
-
+        ShipManager.instance.HeatShip();
     }
 }
