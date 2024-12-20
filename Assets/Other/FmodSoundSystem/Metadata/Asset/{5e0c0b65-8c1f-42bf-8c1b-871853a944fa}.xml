@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{5e0c0b65-8c1f-42bf-8c1b-871853a944fa}">
+		<property name="assetPath">
+			<value>SFX/Player/Jump/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e2f34016-e9b6-4406-89a8-eb107b0d9c3d}</destination>
+		</relationship>
+	</object>
+</objects>

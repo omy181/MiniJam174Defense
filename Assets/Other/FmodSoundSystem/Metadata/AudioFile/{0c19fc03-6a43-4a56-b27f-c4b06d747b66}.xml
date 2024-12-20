@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{0c19fc03-6a43-4a56-b27f-c4b06d747b66}">
+		<property name="assetPath">
+			<value>SFX/Item/SFX_UI_Button_Click_Settings_Switch_2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.22641723356009069</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e2f34016-e9b6-4406-89a8-eb107b0d9c3d}</destination>
+		</relationship>
+	</object>
+</objects>

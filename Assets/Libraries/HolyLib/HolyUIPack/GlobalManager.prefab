@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7279172062359302366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7821121876064502457}
+  - component: {fileID: 4330416230729491587}
+  - component: {fileID: 8586099881661528398}
+  - component: {fileID: 3056231876358392248}
+  - component: {fileID: 8075454484994740026}
+  - component: {fileID: 6667036362667144240}
+  - component: {fileID: 9006991062609484239}
+  - component: {fileID: 3811304707206557948}
+  m_Layer: 0
+  m_Name: GlobalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7821121876064502457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 943.1015, y: 550.38995, z: -9.322128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4330416230729491587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4586c735818c8284b84be831637bfff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8586099881661528398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c310cbea292825541ae8de347bdffa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3056231876358392248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927d30058cdc06d4683e8f392eb04abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MessageBoxPrefab: {fileID: 5288396670175650956, guid: c7f6592d699125d43a6eff8b9edda7e3,
+    type: 3}
+--- !u!114 &8075454484994740026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d005b4ad6852c974c9bca03849aaf9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLanguage: 0
+  csvFile: {fileID: 4900000, guid: d00b9dc6bd3a3df468d896d4dfc3dcba, type: 3}
+--- !u!114 &6667036362667144240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681afffd3fdebc24a8b31eb7be585315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <UIClickSound>k__BackingField:
+    Guid:
+      Data1: 2062035529
+      Data2: 1176772059
+      Data3: -333583968
+      Data4: -1974689674
+    Path: event:/UI/UIClick
+  <UIClick2Sound>k__BackingField:
+    Guid:
+      Data1: 1883847850
+      Data2: 1330415558
+      Data3: 2000130692
+      Data4: -1468272647
+    Path: event:/UI/UIClick2
+  <ItemGetSound>k__BackingField:
+    Guid:
+      Data1: 1752545970
+      Data2: 1178852167
+      Data3: 1724411288
+      Data4: 856585570
+    Path: event:/Item/ItemGet
+  <ItemDropSound>k__BackingField:
+    Guid:
+      Data1: -1749080522
+      Data2: 1125434046
+      Data3: 2063390623
+      Data4: 652865685
+    Path: event:/Item/ItemDrop
+  <WalkSound>k__BackingField:
+    Guid:
+      Data1: 1325467187
+      Data2: 1337237979
+      Data3: -1400286030
+      Data4: -1162298211
+    Path: event:/Player/Walk
+  <JumpSound>k__BackingField:
+    Guid:
+      Data1: 1875710576
+      Data2: 1180285425
+      Data3: -851618381
+      Data4: -1312810702
+    Path: event:/Player/Jump
+  <LandSound>k__BackingField:
+    Guid:
+      Data1: -1398222723
+      Data2: 1249431256
+      Data3: 330337676
+      Data4: 1219212852
+    Path: event:/Player/Land
+  <LeverSound>k__BackingField:
+    Guid:
+      Data1: -1952359882
+      Data2: 1186230217
+      Data3: -1364808546
+      Data4: -171974316
+    Path: event:/Props/LeverUsed
+  <ItemBought>k__BackingField:
+    Guid:
+      Data1: 1689858426
+      Data2: 1091019566
+      Data3: -677748044
+      Data4: -614676900
+    Path: event:/Item/ItemBought
+  <ProccessFinished>k__BackingField:
+    Guid:
+      Data1: 2082441618
+      Data2: 1135663060
+      Data3: -1445989715
+      Data4: 65980405
+    Path: event:/Props/ProccessFinished
+  <ShopDoor>k__BackingField:
+    Guid:
+      Data1: 538620783
+      Data2: 1204617525
+      Data3: 196057519
+      Data4: -1525187133
+    Path: event:/Props/ShopDoor
+  <ResearchDone>k__BackingField:
+    Guid:
+      Data1: 914602061
+      Data2: 1095407354
+      Data3: -1637203265
+      Data4: 678854837
+    Path: event:/Props/ResearchDone
+  <PageFlip>k__BackingField:
+    Guid:
+      Data1: 1421630455
+      Data2: 1327336524
+      Data3: -128684151
+      Data4: -1917248135
+    Path: event:/Props/PageTurn
+  <GameMusicStatus>k__BackingField:
+    Guid:
+      Data1: -1631035494
+      Data2: 1229890087
+      Data3: 1264454316
+      Data4: -1222863857
+    Path: event:/Music/GameStatus
+  <InGameMusic>k__BackingField:
+    Guid:
+      Data1: -1767293924
+      Data2: 1176642135
+      Data3: -1347609683
+      Data4: -1243264748
+    Path: event:/Music/InGameMusic
+--- !u!114 &9006991062609484239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebbf1714ff3c384ba181c5900876b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3811304707206557948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279172062359302366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa4a461f960bcb4492ad26991cb19e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
