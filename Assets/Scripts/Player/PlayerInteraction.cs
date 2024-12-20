@@ -7,6 +7,24 @@ public class PlayerInteraction : MonoBehaviour
     private Interactable _seenInteractable;
     [SerializeField] private CapsuleCollider _capsuleCollider;
     [SerializeField] private Player _player;
+
+    private List<object> _interractLockers = new();
+
+    public void SetInterractLock(object locker, bool state)
+    {
+        if (state)
+        {
+            if (!_interractLockers.Contains(locker))
+                _interractLockers.Add(locker);
+        }
+        else
+        {
+            if (_interractLockers.Contains(locker))
+                _interractLockers.Remove(locker);
+        }
+    }
+    public bool CanInterract { get { return _interractLockers.Count == 0; } }
+
     private void Start()
     {
         InputManager.Instance.OnPressF += _interract;
@@ -23,12 +41,22 @@ public class PlayerInteraction : MonoBehaviour
 
         _seenInteractable = null;
 
+        if (!CanInterract) return;
+
         foreach (var collider in colliders)
         {
             if (collider.TryGetComponent(out Interactable interactable))
             {
                 _seenInteractable = interactable;
                 break;
+            }
+        }
+
+        foreach (var collider in colliders)
+        {
+            if (collider.TryGetComponent(out Collidable collidable))
+            {
+                collidable.OnCollided(_player);
             }
         }
     }

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ThrusterDevice : Device
 {
-    [SerializeField] private GameObject _fire;
+    [SerializeField] private ParticleSystem _fire;
     protected override void _onPowerOff()
     {
-        _fire.gameObject.SetActive(false);
+        _fire.Stop();
+        StarManager.instance.SetSpeedSlow();
     }
 
     protected override void _onPowerOn()
     {
-        _fire.gameObject.SetActive(true);
+        _fire.Play();
+        StarManager.instance.SetSpeedFast();
     }
 
     protected override void _run()

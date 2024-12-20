@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class ShipManager : Singleton<ShipManager>
     [Space]
     [SerializeField] private ShieldDevice _topShield;
     [SerializeField] private ShieldDevice _bottomShield;
+
+
+    private List<MetalPanel> _metalPanels;
 
     private float _health;
     public float Health { get => _health; set {
@@ -37,14 +41,17 @@ public class ShipManager : Singleton<ShipManager>
         }
     }
 
-    public bool isTopShieldActive => _topShield.Power;
-    public bool isBottomShieldActive => _bottomShield.Power;
+    public bool IsTopShieldActive => _topShield.Power;
+    public bool IsBottomShieldActive => _bottomShield.Power;
+    public float MetalPanelBrokenPercent => _metalPanels.Sum(p=>!p.isFixed?1:0)/ _metalPanels.Count;
 
     private void Start()
     {
         Road = 0;
         Health = 1;
         Heat = 1;
+
+        _metalPanels = FindObjectsOfType<MetalPanel>().ToList();
     }
 
     void Update()
@@ -64,7 +71,7 @@ public class ShipManager : Singleton<ShipManager>
 
     public void MakeShipColder()
     {
-        Heat -= Time.deltaTime * 0.01f;
+        Heat -= Time.deltaTime * (0.01f +( MetalPanelBrokenPercent * 0.04f));
     }
 
     public void CollideWithAsteroid()

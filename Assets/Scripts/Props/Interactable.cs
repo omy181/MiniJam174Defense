@@ -10,3 +10,8 @@ public interface IngameEvent
     public float EventProbability();
     public void ActEvent();
 }
+
+public interface Collidable
+{
+    public void OnCollided(Player player);
+}

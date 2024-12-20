@@ -7,7 +7,7 @@ public class Asteroid : MonoBehaviour
     private Vector3 _destiny;
     private Vector3 _start;
     private float _progress;
-    private float _reachTime = 5;
+    private float _reachTime = 10;
     public void Initialize(Vector3 start,Vector3 des)
     {
         _start = start;
@@ -38,11 +38,11 @@ public class Asteroid : MonoBehaviour
     {
         if((_destiny- _start).z > 0)
         {
-            return ShipManager.instance.isTopShieldActive;
+            return ShipManager.instance.IsTopShieldActive;
         }
         else
         {
-            return ShipManager.instance.isBottomShieldActive;
+            return ShipManager.instance.IsBottomShieldActive;
         }
     }
 
