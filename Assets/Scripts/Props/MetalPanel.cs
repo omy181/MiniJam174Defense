@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
-public class MetalPanel : MonoBehaviour,Interactable
+public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
 {
     [SerializeField] private GameObject _fixedModel;
     [SerializeField] private GameObject _brokenModel;
@@ -12,7 +11,7 @@ public class MetalPanel : MonoBehaviour,Interactable
     public bool isFixed => _isFixed;
 
     private float _timer;
-    private float _fixTime = 3;
+    private float _fixTime = 1.5f;
     private bool _fixing;
 
     public void Interract(Player player)
@@ -46,26 +45,61 @@ public class MetalPanel : MonoBehaviour,Interactable
 
     void Start()
     {
-        _break();
+        _fix();
+        GameManager.instance.AddEvent(this);
     }
 
 
     private void _break()
     {
+        if (!isFixed) return;
+
         _fixedModel.SetActive(false);
         _brokenModel.SetActive(true);
         _isFixed = false;
+
+        AttentionManager.instance.ShowAttention(this,transform.position);
     }
 
     private void _fix()
     {
+        if (isFixed) return;
+
         _fixedModel.SetActive(true);
         _brokenModel.SetActive(false);
         _isFixed = true;
+
+        AttentionManager.instance.HideAttention(this);
     }
 
     public bool IsInteractable(Player player)
     {
         return !isFixed;
+    }
+
+    private IEnumerator _breakRandomly()
+    {
+        while (GameManager.instance.IsGameRunning)
+        {
+            if (isFixed)
+            {
+                yield return new WaitForSeconds(Random.Range(5, 30));
+                _break();
+            }
+            else
+            {
+                yield return new WaitForSeconds(5);
+            }
+        }
+    }
+
+    public float EventProbability()
+    {
+        return 0.5f;
+    }
+
+    public void ActEvent()
+    {
+        _break();
     }
 }

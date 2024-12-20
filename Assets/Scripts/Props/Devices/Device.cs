@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Device : MonoBehaviour
 {
     private bool _power;
+    public bool Power => _power;
 
     private void Start()
     {

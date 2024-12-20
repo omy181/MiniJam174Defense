@@ -8,6 +8,9 @@ public class ShipManager : Singleton<ShipManager>
     [SerializeField] private Slider _roadSlider;
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private Slider _heatSlider;
+    [Space]
+    [SerializeField] private ShieldDevice _topShield;
+    [SerializeField] private ShieldDevice _bottomShield;
 
     private float _health;
     public float Health { get => _health; set {
@@ -34,6 +37,9 @@ public class ShipManager : Singleton<ShipManager>
         }
     }
 
+    public bool isTopShieldActive => _topShield.Power;
+    public bool isBottomShieldActive => _bottomShield.Power;
+
     private void Start()
     {
         Road = 0;
@@ -59,5 +65,10 @@ public class ShipManager : Singleton<ShipManager>
     public void MakeShipColder()
     {
         Heat -= Time.deltaTime * 0.01f;
+    }
+
+    public void CollideWithAsteroid()
+    {
+        Health -= 0.2f;
     }
 }
