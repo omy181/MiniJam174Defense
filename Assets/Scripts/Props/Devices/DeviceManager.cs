@@ -16,6 +16,7 @@ public class DeviceManager : Singleton<DeviceManager>
         _angleToDevice.Add(270,UpperShield);
         _angleToDevice.Add(90, BottomShield);
         _angleToDevice.Add(360, Thruster);
+        _angleToDevice.Add(0, Thruster);
         _angleToDevice.Add(180, Heater);
     }
 

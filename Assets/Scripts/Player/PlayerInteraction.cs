@@ -37,11 +37,12 @@ public class PlayerInteraction : MonoBehaviour
 
     private void _checkInteractable()
     {
-        var colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height/2);
 
         _seenInteractable = null;
 
         if (!CanInterract) return;
+
+        var colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height / 2);
 
         foreach (var collider in colliders)
         {
@@ -51,6 +52,8 @@ public class PlayerInteraction : MonoBehaviour
                 break;
             }
         }
+
+        colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height / 4);
 
         foreach (var collider in colliders)
         {

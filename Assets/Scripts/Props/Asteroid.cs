@@ -49,7 +49,7 @@ public class Asteroid : MonoBehaviour
     private void _onCollidedWithShip()
     {
         ShipManager.instance.CollideWithAsteroid();
-        // cam shake
+        CameraProps.instance.CamShake(0.3f);
         AttentionManager.instance.HideAttention(gameObject);
         Destroy(gameObject);
     }

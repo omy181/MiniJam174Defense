@@ -19,12 +19,16 @@ public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
         InputManager.Instance.SetInputLock(player,true);
         _fixing = true;
         _timer = _fixTime;
+
+        player.Movement.RepairPlayer();
     }
 
     public void StopInterract(Player player)
     {
         InputManager.Instance.SetInputLock(player, false);
         _fixing = false;
+
+        player.Movement.StopPlayerAnimation();
     }
 
     private void Update()
@@ -75,22 +79,6 @@ public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
     public bool IsInteractable(Player player)
     {
         return !isFixed;
-    }
-
-    private IEnumerator _breakRandomly()
-    {
-        while (GameManager.instance.IsGameRunning)
-        {
-            if (isFixed)
-            {
-                yield return new WaitForSeconds(Random.Range(5, 30));
-                _break();
-            }
-            else
-            {
-                yield return new WaitForSeconds(5);
-            }
-        }
     }
 
     public float EventProbability()

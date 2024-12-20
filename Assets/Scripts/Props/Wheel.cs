@@ -70,11 +70,11 @@ public class Wheel : MonoBehaviour, Interactable
             player.transform.SetParent(null);
             InputManager.Instance.SetInputLock(player, false);
 
-            InputManager.Instance.OnPressQ -= _changeDirMinus;
-            InputManager.Instance.OnUnPressQ -= _changeDirPlus;
+            InputManager.Instance.OnPressA -= _changeDirMinus;
+            InputManager.Instance.OnUnPressA -= _changeDirPlus;
 
-            InputManager.Instance.OnPressE -= _changeDirPlus;
-            InputManager.Instance.OnUnPressE -= _changeDirMinus;
+            InputManager.Instance.OnPressD -= _changeDirPlus;
+            InputManager.Instance.OnUnPressD -= _changeDirMinus;
         }
         else
         {
@@ -84,11 +84,11 @@ public class Wheel : MonoBehaviour, Interactable
             player.transform.SetParent(transform);
             InputManager.Instance.SetInputLock(player,true);
 
-            InputManager.Instance.OnPressQ += _changeDirMinus;
-            InputManager.Instance.OnUnPressQ += _changeDirPlus;
+            InputManager.Instance.OnPressA += _changeDirMinus;
+            InputManager.Instance.OnUnPressA += _changeDirPlus;
 
-            InputManager.Instance.OnPressE += _changeDirPlus;
-            InputManager.Instance.OnUnPressE += _changeDirMinus;
+            InputManager.Instance.OnPressD += _changeDirPlus;
+            InputManager.Instance.OnUnPressD += _changeDirMinus;
         }
         
     }

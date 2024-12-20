@@ -12,6 +12,7 @@ public class ShipManager : Singleton<ShipManager>
     [Space]
     [SerializeField] private ShieldDevice _topShield;
     [SerializeField] private ShieldDevice _bottomShield;
+    [SerializeField] private ThrusterDevice _thruster;
 
 
     private List<MetalPanel> _metalPanels;
@@ -19,7 +20,13 @@ public class ShipManager : Singleton<ShipManager>
     private float _health;
     public float Health { get => _health; set {
             _health = Mathf.Clamp01(value);
-            _healthSlider.value = _health; } }
+            _healthSlider.value = _health; 
+            
+            if(_health == 0)
+            {
+                GameManager.instance.GameOver(false);
+            }
+        } }
 
     private float _road;
     public float Road
@@ -28,6 +35,11 @@ public class ShipManager : Singleton<ShipManager>
         {
             _road = Mathf.Clamp01(value);
             _roadSlider.value = _road;
+
+            if (_road == 1)
+            {
+                GameManager.instance.GameOver(true);
+            }
         }
     }
 
@@ -38,12 +50,23 @@ public class ShipManager : Singleton<ShipManager>
         {
             _heat = Mathf.Clamp01(value);
             _heatSlider.value = _heat;
+
+            if (_heat == 0)
+            {
+                GameManager.instance.GameOver(false);
+            }
         }
     }
+
+    //                      electrycity bar da ekle, bisiklet cevirdikce biriksin
+
+    // gemi hizlaninca fov degissin
+    // kamera cok hafif oyuncuyu takip etsin
 
     public bool IsTopShieldActive => _topShield.Power;
     public bool IsBottomShieldActive => _bottomShield.Power;
     public float MetalPanelBrokenPercent => _metalPanels.Sum(p=>!p.isFixed?1:0)/ _metalPanels.Count;
+    public bool IsThrusterActive => _thruster.Power;
 
     private void Start()
     {
@@ -61,7 +84,7 @@ public class ShipManager : Singleton<ShipManager>
 
     public void RunShip()
     {
-        Road += Time.deltaTime * 0.01f;
+        Road += Time.deltaTime * (0.01f - MetalPanelBrokenPercent * 0.008f);
     }
 
     public void HeatShip()
@@ -71,7 +94,7 @@ public class ShipManager : Singleton<ShipManager>
 
     public void MakeShipColder()
     {
-        Heat -= Time.deltaTime * (0.01f +( MetalPanelBrokenPercent * 0.04f));
+        Heat -= Time.deltaTime * (0.02f +( MetalPanelBrokenPercent * 0.08f)+(0.02f* (IsThrusterActive ? 1:0)));
     }
 
     public void CollideWithAsteroid()

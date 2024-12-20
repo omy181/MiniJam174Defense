@@ -45,7 +45,7 @@ Animation:
   m_Animation: {fileID: 0}
   m_Animations: []
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &5445997217748682629
@@ -184,6 +184,7 @@ MonoBehaviour:
   _speed: 150
   _animation: {fileID: 1231521718914102936}
   _zapAnimation: {fileID: 7400000, guid: 297824aa281d27c44a55dd5e31bbf97c, type: 2}
+  _repairAnimation: {fileID: 7400000, guid: a10c221cfa4f484408316458459f4dc5, type: 2}
 --- !u!114 &3027544083625096771
 MonoBehaviour:
   m_ObjectHideFlags: 0

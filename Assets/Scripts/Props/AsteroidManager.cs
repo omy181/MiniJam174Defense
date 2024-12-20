@@ -16,13 +16,13 @@ public class AsteroidManager : MonoBehaviour,IngameEvent
     private void _sendAsteroidToTop()
     {       
         var asteroid = _sendAsteroid(new Vector3(0,0,-60), new Vector3(0, 0, -15));
-        AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 0, -15));
+        AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, -10));
     }
 
     private void _sendAsteroidToBottom()
     {
         var asteroid = _sendAsteroid(new Vector3(0, 0, 60), new Vector3(0, 0, 15));
-        AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 0, 15));
+        AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, 10));
     }
 
     private void Start()
@@ -32,7 +32,7 @@ public class AsteroidManager : MonoBehaviour,IngameEvent
 
     public float EventProbability()
     {
-        return 0.3f;
+        return 0.6f;
     }
 
     public void ActEvent()

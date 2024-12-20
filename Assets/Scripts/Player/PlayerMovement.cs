@@ -22,14 +22,20 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animation _animation;
     [SerializeField] private AnimationClip _zapAnimation;
+    [SerializeField] private AnimationClip _repairAnimation;
     public void ZapPlayer()
     {
         _animation.clip = _zapAnimation;
         _animation.Play();
     }
+    public void RepairPlayer()
+    {
+        _animation.clip = _repairAnimation;
+        _animation.Play();
+    }
 
     public void StopPlayerAnimation()
     {
-        _animation?.Stop();
+        _animation.Stop();
     }
 }

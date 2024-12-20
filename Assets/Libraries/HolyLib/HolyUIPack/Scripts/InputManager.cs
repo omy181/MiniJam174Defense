@@ -89,6 +89,10 @@ public class InputManager : MonoBehaviour
         UnPressF();
         PressQ();
         UnPressQ();
+        PressA();
+        UnPressA();
+        PressD();
+        UnPressD();
     }
 
     public Action<float,float> OnMovement;
@@ -144,6 +148,42 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E))
         {
             if (OnUnPressE != null) OnUnPressE();
+        }
+    }
+
+    public Action OnPressA;
+    void PressA()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (OnPressA != null) OnPressA();
+        }
+    }
+
+    public Action OnUnPressA;
+    void UnPressA()
+    {
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            if (OnUnPressA != null) OnUnPressA();
+        }
+    }
+
+    public Action OnPressD;
+    void PressD()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (OnPressD != null) OnPressD();
+        }
+    }
+
+    public Action OnUnPressD;
+    void UnPressD()
+    {
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            if (OnUnPressD != null) OnUnPressD();
         }
     }
 
