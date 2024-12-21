@@ -1,15 +1,16 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Device : MonoBehaviour
+public abstract class Device : NetworkBehaviour
 {
     private bool _power;
     public bool Power => _power;
 
     private void Start()
     {
-        PowerOff();
+        _onPowerOff();
     }
     private void Update()
     {
@@ -18,19 +19,21 @@ public abstract class Device : MonoBehaviour
     }
     protected abstract void _run();
 
-    public void PowerOn()
+    [ClientRpc]
+    public void RpcPowerOn()
     {
         _power = true;
         _onPowerOn();
     }
 
-    protected abstract void _onPowerOn();
+    protected virtual void _onPowerOn() { }
 
-    public void PowerOff()
+    [ClientRpc]
+    public void RpcPowerOff()
     {
         _power = false;
         _onPowerOff();
     }
 
-    protected abstract void _onPowerOff();
+     protected virtual void _onPowerOff() { }
 }

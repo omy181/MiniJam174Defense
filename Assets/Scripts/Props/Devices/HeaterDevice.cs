@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,12 @@ using UnityEngine;
 public class HeaterDevice : Device
 {
 
+
     protected override void _onPowerOff()
     {
         
     }
+
 
     protected override void _onPowerOn()
     {

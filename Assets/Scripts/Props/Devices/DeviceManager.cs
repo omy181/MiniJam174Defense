@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,13 +22,12 @@ public class DeviceManager : Singleton<DeviceManager>
     }
 
 
-    public void PowerOnDeviceByAngle(int angle)
+    [Server] public void PowerOnDeviceByAngle(int angle)
     {
-
 
         if (angle == -1)
         {
-            _currentOnDevice?.PowerOff();
+            _currentOnDevice?.RpcPowerOff();
             _currentOnDevice = null;
         }
         else
@@ -35,14 +35,12 @@ public class DeviceManager : Singleton<DeviceManager>
             if(_angleToDevice.TryGetValue(angle, out Device newDevice)){
                 if(newDevice != _currentOnDevice)
                 {
-                    _currentOnDevice?.PowerOff();
+                    _currentOnDevice?.RpcPowerOff();
                     _currentOnDevice = newDevice;
-                    _currentOnDevice?.PowerOn();
+                    _currentOnDevice?.RpcPowerOn();
                 }
             }
-
-            
-
         }
     }
+
 }
