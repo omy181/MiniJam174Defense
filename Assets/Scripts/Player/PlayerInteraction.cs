@@ -72,9 +72,15 @@ public class PlayerInteraction : NetworkBehaviour
         {
             if (collider.TryGetComponent(out Collidable collidable))
             {
-                collidable.OnCollided(_player);
+                _onCollided(collidable);
             }
         }
+    }
+
+    [Server] private void _onCollided(Collidable collidable)
+    {
+        if(isServer)
+        collidable.OnCollided(_player);
     }
 
 
@@ -83,9 +89,9 @@ public class PlayerInteraction : NetworkBehaviour
         if (_seenInteractable != null && _seenInteractable.IsInteractable(_player)) _cmdInterract(_player);       
     }
 
-    [Command] private void _cmdInterract(Player player)
+    [Command(requiresAuthority = false)] private void _cmdInterract(Player player)
     {
-        _seenInteractable.Interract(_player);
+        _seenInteractable.Interract(player);
     }
 
     private void _stopInterract()
@@ -93,7 +99,7 @@ public class PlayerInteraction : NetworkBehaviour
         if (_seenInteractable != null) _cmdStopInterract(_player);
     }
 
-    [Command] private void _cmdStopInterract(Player player)
+    [Command(requiresAuthority = false)] private void _cmdStopInterract(Player player)
     {
         _seenInteractable.StopInterract(_player);
     }

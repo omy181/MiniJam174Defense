@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidManager : NetworkBehaviour,IngameEvent
+public class AsteroidManager : NetworkSingleton<AsteroidManager>
 {
     [SerializeField] private GameObject _asteroidOBJ;
 
@@ -14,13 +14,13 @@ public class AsteroidManager : NetworkBehaviour,IngameEvent
         return obj;
     }
 
-    private void _sendAsteroidToTop()
+    public void SendAsteroidToTop()
     {       
         var asteroid = _sendAsteroid(new Vector3(0,0,-60), new Vector3(0, 0, -15));
         AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, -10));
     }
 
-    private void _sendAsteroidToBottom()
+    public void SendAsteroidToBottom()
     {
         var asteroid = _sendAsteroid(new Vector3(0, 0, 60), new Vector3(0, 0, 15));
         AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, 10));
@@ -28,26 +28,51 @@ public class AsteroidManager : NetworkBehaviour,IngameEvent
 
     private void Start()
     {
-        GameManager.instance.AddEvent(this);
+        GameManager.instance.AddEvent(new AsteroidTopEvent());
+        GameManager.instance.AddEvent(new AsteroidBottomEvent());
     }
 
-    public float EventProbability()
-    {
-        return 0.6f;
-    }
 
     [ClientRpc]
     public void RpcActEvent()
     {
         if (Random.Range(0f, 1f) < 0.5f)
         {
-            _sendAsteroidToTop();
+            SendAsteroidToTop();
         }
         else
         {
-            _sendAsteroidToBottom();
+            SendAsteroidToBottom();
         }
         
         
+    }
+}
+
+class AsteroidTopEvent : IngameEvent
+{
+    public float EventProbability()
+    {
+        return 0.3f;
+    }
+
+    [ClientRpc]
+    public void RpcActEvent()
+    {
+        AsteroidManager.instance.SendAsteroidToTop();
+    }
+}
+
+class AsteroidBottomEvent : IngameEvent
+{
+    public float EventProbability()
+    {
+        return 0.3f;
+    }
+
+    [ClientRpc]
+    public void RpcActEvent()
+    {
+        AsteroidManager.instance.SendAsteroidToBottom();
     }
 }

@@ -41,18 +41,14 @@ public class PlayerMovement : NetworkBehaviour
         RpcZapPlayer();
     }
 
-    [ClientRpc] private void RpcZapPlayer()
+    [ClientRpc] public void RpcZapPlayer()
     {
         _animation.clip = _zapAnimation;
         _animation.Play();
 
     }
-    [Command] public void CmdRepairPlayer()
-    {
-        _rpcRepaitPlayer();
-    }
 
-    [ClientRpc] private void _rpcRepaitPlayer()
+    [ClientRpc] public void RpcRepairPlayer()
     {
         _animation.clip = _repairAnimation;
         _animation.Play();
@@ -60,10 +56,10 @@ public class PlayerMovement : NetworkBehaviour
 
     [Command] public void CMDStopPlayerAnimation()
     {
-        _rpcStopPlayerAnimation();
+        RpcStopPlayerAnimation();
     }
 
-    [ClientRpc] private void _rpcStopPlayerAnimation()
+    [ClientRpc] public void RpcStopPlayerAnimation()
     {
         _animation.Stop();
     }

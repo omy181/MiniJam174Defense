@@ -21,7 +21,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         _fixing = true;
         _timer = _fixTime;
 
-        player.Movement.CmdRepairPlayer();
+        player.Movement.RpcRepairPlayer();
     }
 
 
@@ -30,7 +30,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         InputManager.Instance.SetInputLock(player, false);
         _fixing = false;
 
-        player.Movement.CMDStopPlayerAnimation();
+        player.Movement.RpcStopPlayerAnimation();
     }
 
     private void Update()

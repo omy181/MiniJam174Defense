@@ -11,7 +11,6 @@ public class Wheel : NetworkBehaviour, Interactable
     [SerializeField] private float _speed = 5;
     private Dictionary<Player, int> _playerDir = new();
     private int _dir => _playerDir.Sum(p=>p.Value);
-    private Player _holdingPlayer;
 
     private void Update()
     {
@@ -76,56 +75,58 @@ public class Wheel : NetworkBehaviour, Interactable
     }
 
 
-    public void Interract(Player player)
+    [Server] public void Interract(Player player)
     {
-        if (_holdingPlayer) {
-            _cmdOnPlayerStoppedHolding(player);
-            _holdingPlayer = null;
+        if (_playerDir.ContainsKey(player)) {
+            _playerDir.Remove(player);
+            _stopPlayerHold(player.connectionToClient);
             player.transform.SetParent(null);
-            InputManager.Instance.SetInputLock(player, false);
-
-            InputManager.Instance.OnPressA -= _changeDirMinus;
-            InputManager.Instance.OnUnPressA -= _changeDirPlus;
-
-            InputManager.Instance.OnPressD -= _changeDirPlus;
-            InputManager.Instance.OnUnPressD -= _changeDirMinus;
         }
         else
         {
-            _cmdOnPlayerStartedHolding(player);
-            _holdingPlayer = player;
+            _playerDir[player] = 0;
+            _startPlayerHold(player.connectionToClient);
             player.transform.SetParent(transform);
-            InputManager.Instance.SetInputLock(player,true);
-
-            InputManager.Instance.OnPressA += _changeDirMinus;
-            InputManager.Instance.OnUnPressA += _changeDirPlus;
-
-            InputManager.Instance.OnPressD += _changeDirPlus;
-            InputManager.Instance.OnUnPressD += _changeDirMinus;
         }
         
     }
 
-    [Command(requiresAuthority = false)]
-    private void _cmdOnPlayerStartedHolding(Player player)
+
+
+    [TargetRpc] private void _startPlayerHold(NetworkConnectionToClient target)
     {
-        _playerDir[player] = 0;
+        InputManager.Instance.SetInputLock(PlayerManager.instance.LocalePlayer, true);
+
+        InputManager.Instance.OnPressA += _changeDirMinus;
+        InputManager.Instance.OnUnPressA += _changeDirPlus;
+
+        InputManager.Instance.OnPressD += _changeDirPlus;
+        InputManager.Instance.OnUnPressD += _changeDirMinus;
+
+        PlayerManager.instance.LocalePlayer.transform.SetParent(transform);
     }
 
-    [Command(requiresAuthority = false)]
-    private void _cmdOnPlayerStoppedHolding(Player player)
+    [TargetRpc] private void _stopPlayerHold(NetworkConnectionToClient target)
     {
-        _playerDir.Remove(player);
+        InputManager.Instance.SetInputLock(PlayerManager.instance.LocalePlayer, false);
+
+        InputManager.Instance.OnPressA -= _changeDirMinus;
+        InputManager.Instance.OnUnPressA -= _changeDirPlus;
+
+        InputManager.Instance.OnPressD -= _changeDirPlus;
+        InputManager.Instance.OnUnPressD -= _changeDirMinus;
+
+        PlayerManager.instance.LocalePlayer.transform.SetParent(null);
     }
 
     private void _changeDirMinus()
     {
-        _cmdChangeDirMinus(_holdingPlayer);        
+        _cmdChangeDirMinus(PlayerManager.instance.LocalePlayer);        
     }
 
     private void _changeDirPlus()
     {
-        _cmdChangeDirPlus(_holdingPlayer);
+        _cmdChangeDirPlus(PlayerManager.instance.LocalePlayer);
     }
 
     [Command(requiresAuthority =false)] private void _cmdChangeDirMinus(Player player)
