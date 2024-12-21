@@ -12,11 +12,10 @@ public class GameOverScreen : MonoBehaviour
     void Start()
     {
         _restartButton.onClick.AddListener(LevelManager.instance.RestartLevel);
-        GameManager.instance.OnGameOver += _onGameOver;
         _panel.gameObject.SetActive(false);
     }
 
-    private void _onGameOver(bool isWin)
+    public void OnGameOver(bool isWin)
     {
         _panel.gameObject.SetActive(true);
         if (isWin)

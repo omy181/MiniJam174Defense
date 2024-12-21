@@ -1,9 +1,10 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Wheel : MonoBehaviour, Interactable
+public class Wheel : NetworkBehaviour, Interactable
 {
     private int _playerCount => _players.Count;
     private List<Player> _players = new();

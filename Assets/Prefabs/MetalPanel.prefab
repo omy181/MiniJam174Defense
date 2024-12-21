@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4231440794137110028}
   - component: {fileID: 3382835762026539367}
   - component: {fileID: 3105456785016261847}
+  - component: {fileID: 1219867674439544711}
   m_Layer: 0
   m_Name: MetalPanel
   m_TagString: Untagged
@@ -68,8 +69,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84f5b58b6a18734c8eb86e295dd9bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _fixedModel: {fileID: 2687186540359499321}
   _brokenModel: {fileID: 8235176638297330220}
+--- !u!114 &1219867674439544711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475110850941354696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 847921256
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1001 &2993666947060302696
 PrefabInstance:
   m_ObjectHideFlags: 0

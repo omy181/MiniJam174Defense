@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidManager : MonoBehaviour,IngameEvent
+public class AsteroidManager : NetworkBehaviour,IngameEvent
 {
     [SerializeField] private GameObject _asteroidOBJ;
 
@@ -35,7 +36,8 @@ public class AsteroidManager : MonoBehaviour,IngameEvent
         return 0.6f;
     }
 
-    public void ActEvent()
+    [ClientRpc]
+    public void RpcActEvent()
     {
         if (Random.Range(0f, 1f) < 0.5f)
         {

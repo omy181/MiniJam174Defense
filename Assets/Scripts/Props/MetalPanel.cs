@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
+public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
 {
     [SerializeField] private GameObject _fixedModel;
     [SerializeField] private GameObject _brokenModel;
@@ -20,15 +21,16 @@ public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
         _fixing = true;
         _timer = _fixTime;
 
-        player.Movement.RepairPlayer();
+        player.Movement.CmdRepairPlayer();
     }
+
 
     public void StopInterract(Player player)
     {
         InputManager.Instance.SetInputLock(player, false);
         _fixing = false;
 
-        player.Movement.StopPlayerAnimation();
+        player.Movement.CMDStopPlayerAnimation();
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
                 {
                     _timer = 0;
                     _fixing = false;
-                    _fix();
+                    _cmdFix();
                 }
             }
     }
@@ -50,25 +52,41 @@ public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
     void Start()
     {
         _fix();
+        if (!isServer) return;
         GameManager.instance.AddEvent(this);
     }
 
 
-    private void _break()
+    [Command(requiresAuthority =false)] private void _cmdBreak()
     {
         if (!isFixed) return;
 
+        _rpcBreak();
+    }
+
+    [ClientRpc] private void _rpcBreak()
+    {
         _fixedModel.SetActive(false);
         _brokenModel.SetActive(true);
         _isFixed = false;
 
-        AttentionManager.instance.ShowAttention(this,transform.position);
+        AttentionManager.instance.ShowAttention(this, transform.position);
+    }
+
+    [Command(requiresAuthority =false)] private void _cmdFix()
+    {
+        if (isFixed) return;
+
+        _rpcFix();
+    }
+
+    [ClientRpc] private void _rpcFix()
+    {
+        _fix();
     }
 
     private void _fix()
     {
-        if (isFixed) return;
-
         _fixedModel.SetActive(true);
         _brokenModel.SetActive(false);
         _isFixed = true;
@@ -86,8 +104,9 @@ public class MetalPanel : MonoBehaviour,Interactable,IngameEvent
         return 0.5f;
     }
 
-    public void ActEvent()
+    [ClientRpc]
+    public void RpcActEvent()
     {
-        _break();
+        _cmdBreak();
     }
 }

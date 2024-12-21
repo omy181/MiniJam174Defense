@@ -55,7 +55,7 @@ public class PlayerInteraction : NetworkBehaviour
 
         if (!CanInterract) return;
 
-        var colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height / 2);
+        var colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height / 4);
 
         foreach (var collider in colliders)
         {
@@ -77,13 +77,24 @@ public class PlayerInteraction : NetworkBehaviour
         }
     }
 
+
     private void _interract()
     {
-        if (_seenInteractable != null && _seenInteractable.IsInteractable(_player)) _seenInteractable.Interract(_player);
+        if (_seenInteractable != null && _seenInteractable.IsInteractable(_player)) _cmdInterract(_player);       
+    }
+
+    [Command] private void _cmdInterract(Player player)
+    {
+        _seenInteractable.Interract(_player);
     }
 
     private void _stopInterract()
     {
-        if (_seenInteractable != null) _seenInteractable.StopInterract(_player);
+        if (_seenInteractable != null) _cmdStopInterract(_player);
+    }
+
+    [Command] private void _cmdStopInterract(Player player)
+    {
+        _seenInteractable.StopInterract(_player);
     }
 }

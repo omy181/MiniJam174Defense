@@ -1,3 +1,6 @@
+using Mirror;
+using UnityEngine;
+
 public interface Interactable
 {
     public void Interract(Player player);
@@ -8,10 +11,10 @@ public interface Interactable
 public interface IngameEvent
 {
     public float EventProbability();
-    public void ActEvent();
+    [ClientRpc] public void RpcActEvent();
 }
 
 public interface Collidable
 {
-    public void OnCollided(Player player);
+    [ClientRpc] public void OnCollided(Player player);
 }

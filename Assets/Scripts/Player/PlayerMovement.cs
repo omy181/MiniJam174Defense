@@ -36,18 +36,34 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Animation _animation;
     [SerializeField] private AnimationClip _zapAnimation;
     [SerializeField] private AnimationClip _repairAnimation;
-    public void ZapPlayer()
+    [Command] public void CmdZapPlayer()
+    {
+        RpcZapPlayer();
+    }
+
+    [ClientRpc] private void RpcZapPlayer()
     {
         _animation.clip = _zapAnimation;
         _animation.Play();
+
     }
-    public void RepairPlayer()
+    [Command] public void CmdRepairPlayer()
+    {
+        _rpcRepaitPlayer();
+    }
+
+    [ClientRpc] private void _rpcRepaitPlayer()
     {
         _animation.clip = _repairAnimation;
         _animation.Play();
     }
 
-    public void StopPlayerAnimation()
+    [Command] public void CMDStopPlayerAnimation()
+    {
+        _rpcStopPlayerAnimation();
+    }
+
+    [ClientRpc] private void _rpcStopPlayerAnimation()
     {
         _animation.Stop();
     }

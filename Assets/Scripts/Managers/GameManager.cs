@@ -1,12 +1,15 @@
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : NetworkSingleton<GameManager>
 {
-    private bool _isgameRunning = false;
+    [SerializeField] private GameOverScreen _gameOverScreen;
+
+    [SyncVar] private bool _isgameRunning = false;
     public bool IsGameRunning => _isgameRunning;
 
     private List<IngameEvent> _ingameEvents = new();
@@ -22,6 +25,14 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void StartGame()
+    {
+        if (_isgameRunning) return;
+
+        _cmdStartGame();
+    }
+
+    [Command(requiresAuthority = false)]
+    private void _cmdStartGame()
     {
         _isgameRunning = true;
         StartCoroutine(_runEvents());
@@ -49,20 +60,25 @@ public class GameManager : Singleton<GameManager>
                 }
             }
 
-            selectedEvent.ActEvent();
+            selectedEvent.RpcActEvent();
 
             float randomInterval = UnityEngine.Random.Range(4f, 10f);
             yield return new WaitForSeconds(randomInterval);
         }
     }
 
+    [Server]
     public void GameOver(bool isWin)
     {
         if (!IsGameRunning) return;
 
-        _isgameRunning = false;
-        OnGameOver(isWin);
+        RpcGameOver(isWin);       
     }
 
-    public Action<bool> OnGameOver;
+    [ClientRpc]
+    private void RpcGameOver(bool isWin) {
+        _isgameRunning = false;
+        _gameOverScreen.OnGameOver(isWin);
+    }
+
 }

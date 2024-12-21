@@ -1,10 +1,11 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShipManager : Singleton<ShipManager>
+public class ShipManager : NetworkSingleton<ShipManager>
 {
     [SerializeField] private Slider _roadSlider;
     [SerializeField] private Slider _healthSlider;
@@ -17,7 +18,7 @@ public class ShipManager : Singleton<ShipManager>
 
     private List<MetalPanel> _metalPanels;
 
-    private float _health;
+    [SyncVar(hook = nameof(_onHealthChanged))] private float _health;
     public float Health { get => _health; set {
             _health = Mathf.Clamp01(value);
             _healthSlider.value = _health; 
@@ -28,7 +29,12 @@ public class ShipManager : Singleton<ShipManager>
             }
         } }
 
-    private float _road;
+    private void _onHealthChanged(float oldHealth, float newHealth)
+    {
+        _healthSlider.value = newHealth;
+    }
+
+    [SyncVar(hook = nameof(_onRoadChanged))] private float _road;
     public float Road
     {
         get => _road; set
@@ -43,7 +49,12 @@ public class ShipManager : Singleton<ShipManager>
         }
     }
 
-    private float _heat;
+    private void _onRoadChanged(float oldRoad, float newRoad)
+    {
+        _roadSlider.value = newRoad;
+    }
+
+    [SyncVar(hook = nameof(_onHeatChanged))] private float _heat;
     public float Heat
     {
         get => _heat; set
@@ -56,6 +67,11 @@ public class ShipManager : Singleton<ShipManager>
                 GameManager.instance.GameOver(false);
             }
         }
+    }
+
+    private void _onHeatChanged(float oldHeat,float newHeat)
+    {
+        _heatSlider.value = newHeat;
     }
 
     //                      electrycity bar da ekle, bisiklet cevirdikce biriksin
@@ -79,27 +95,32 @@ public class ShipManager : Singleton<ShipManager>
 
     void Update()
     {
-        MakeShipColder();
+        if(isServer)
+            MakeShipColder();
     }
 
+    [Server]
     public void RunShip()
     {
         if (!GameManager.instance.IsGameRunning) return;
         Road += Time.deltaTime * (0.01f - MetalPanelBrokenPercent * 0.008f);
     }
 
+    [Server]
     public void HeatShip()
     {
         if (!GameManager.instance.IsGameRunning) return;
         Heat += Time.deltaTime * 0.3f;
     }
 
+    [Server]
     public void MakeShipColder()
     {
         if (!GameManager.instance.IsGameRunning) return;
         Heat -= Time.deltaTime * (0.02f +( MetalPanelBrokenPercent * 0.08f)+(0.02f* (IsThrusterActive ? 1:0)));
     }
 
+    [Server]
     public void CollideWithAsteroid()
     {
         Health -= 0.2f;

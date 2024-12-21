@@ -11,7 +11,7 @@ public class ElectricCable : MonoBehaviour, Collidable
         player.Interaction.SetInterractLock(this,true);
         InputManager.Instance.SetInputLock(this,true);
 
-        player.Movement.ZapPlayer();
+        player.Movement.CmdZapPlayer();
         player.Movement.AddForceImpulse(Vector3.Project((player.transform.position - transform.position).normalized, transform.up).normalized  *50);
 
         HolyTimer.CreateNewTimer(_zapTime, ()=> _stopZappingPlayer(player)).StartTimer();
@@ -21,6 +21,6 @@ public class ElectricCable : MonoBehaviour, Collidable
     {
         player.Interaction.SetInterractLock(this, false);
         InputManager.Instance.SetInputLock(this, false);
-        player.Movement.StopPlayerAnimation();
+        player.Movement.CMDStopPlayerAnimation();
     }
 }
