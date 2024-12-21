@@ -53,18 +53,21 @@ public class PlayerInteraction : NetworkBehaviour
 
         _seenInteractable = null;
 
-        if (!CanInterract) return;
+        if (!CanInterract) { InteractionUIManager.instance.DisableInteraction(); return; }
 
         var colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height / 4);
 
         foreach (var collider in colliders)
         {
-            if (collider.TryGetComponent(out Interactable interactable))
+            if (collider.TryGetComponent(out Interactable interactable) /*&& interactable.IsInteractable(_player)*/)
             {
+                if(isLocalPlayer) InteractionUIManager.instance.EnableInteraction(collider.transform.position + new Vector3(0,2,0));
                 _seenInteractable = interactable;
                 break;
             }
         }
+
+        if(_seenInteractable == null && isLocalPlayer) InteractionUIManager.instance.DisableInteraction();
 
         colliders = Physics.OverlapBox(transform.position, Vector3.one * _capsuleCollider.height / 4);
 
@@ -96,11 +99,13 @@ public class PlayerInteraction : NetworkBehaviour
 
     private void _stopInterract()
     {
-        if (_seenInteractable != null) _cmdStopInterract(_player);
+        if (_seenInteractable != null) { 
+            _cmdStopInterract(_player); 
+        } 
     }
 
     [Command(requiresAuthority = false)] private void _cmdStopInterract(Player player)
     {
-        _seenInteractable.StopInterract(_player);
+        _seenInteractable.StopInterract(player);
     }
 }

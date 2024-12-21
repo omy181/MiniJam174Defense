@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     public void PlaySinglePlayer()
     {
         Host();
-
     }
 
     public void Host()

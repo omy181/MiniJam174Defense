@@ -21,7 +21,10 @@ public class GameManager : NetworkSingleton<GameManager>
 
     private void Start()
     {
-        Application.targetFrameRate = 60;       
+        Application.targetFrameRate = 60;
+
+        AddEvent(new AsteroidTopEvent());
+        AddEvent(new AsteroidBottomEvent());
     }
 
     public void StartGame()

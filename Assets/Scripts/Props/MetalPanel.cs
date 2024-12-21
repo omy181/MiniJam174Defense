@@ -17,7 +17,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
 
     public void Interract(Player player)
     {
-        InputManager.Instance.SetInputLock(player,true);
+        //InputManager.Instance.SetInputLock(player,true);
         _fixing = true;
         _timer = _fixTime;
 
@@ -27,7 +27,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
 
     public void StopInterract(Player player)
     {
-        InputManager.Instance.SetInputLock(player, false);
+        //InputManager.Instance.SetInputLock(player, false);
         _fixing = false;
 
         player.Movement.RpcStopPlayerAnimation();
@@ -90,6 +90,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         _fixedModel.SetActive(true);
         _brokenModel.SetActive(false);
         _isFixed = true;
+        _fixing = false;
 
         AttentionManager.instance.HideAttention(this);
     }

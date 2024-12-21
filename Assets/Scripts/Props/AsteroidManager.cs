@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidManager : NetworkSingleton<AsteroidManager>
+public class AsteroidManager : Singleton<AsteroidManager>
 {
     [SerializeField] private GameObject _asteroidOBJ;
 
@@ -26,27 +26,6 @@ public class AsteroidManager : NetworkSingleton<AsteroidManager>
         AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, 10));
     }
 
-    private void Start()
-    {
-        GameManager.instance.AddEvent(new AsteroidTopEvent());
-        GameManager.instance.AddEvent(new AsteroidBottomEvent());
-    }
-
-
-    [ClientRpc]
-    public void RpcActEvent()
-    {
-        if (Random.Range(0f, 1f) < 0.5f)
-        {
-            SendAsteroidToTop();
-        }
-        else
-        {
-            SendAsteroidToBottom();
-        }
-        
-        
-    }
 }
 
 class AsteroidTopEvent : IngameEvent
