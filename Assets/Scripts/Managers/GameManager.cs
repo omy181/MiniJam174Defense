@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private bool _isgameRunning = true;
+    private bool _isgameRunning = false;
     public bool IsGameRunning => _isgameRunning;
 
     private List<IngameEvent> _ingameEvents = new();
@@ -18,6 +18,12 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        Application.targetFrameRate = 60;       
+    }
+
+    public void StartGame()
+    {
+        _isgameRunning = true;
         StartCoroutine(_runEvents());
     }
 

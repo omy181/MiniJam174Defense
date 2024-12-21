@@ -84,16 +84,19 @@ public class ShipManager : Singleton<ShipManager>
 
     public void RunShip()
     {
+        if (!GameManager.instance.IsGameRunning) return;
         Road += Time.deltaTime * (0.01f - MetalPanelBrokenPercent * 0.008f);
     }
 
     public void HeatShip()
     {
+        if (!GameManager.instance.IsGameRunning) return;
         Heat += Time.deltaTime * 0.3f;
     }
 
     public void MakeShipColder()
     {
+        if (!GameManager.instance.IsGameRunning) return;
         Heat -= Time.deltaTime * (0.02f +( MetalPanelBrokenPercent * 0.08f)+(0.02f* (IsThrusterActive ? 1:0)));
     }
 

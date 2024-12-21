@@ -1,16 +1,22 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    [SerializeField] private Player _localePlayer; // for testing
-    public Player LocalePlayer { get; private set; }
-    public int PlayerCount => 1;
+    [SerializeField] private NetworkManager _networkManager;
+
+    public Player LocalePlayer { get; set; }
+    public int PlayerCount => _networkManager.numPlayers;
 
     protected override void Awake()
     {
         base.Awake();
-        LocalePlayer = _localePlayer;
+    }
+
+    public void SetLocalePlayer(Player player)
+    {
+        LocalePlayer = player;
     }
 }

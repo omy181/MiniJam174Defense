@@ -1,14 +1,27 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private float _speed;
-    private void Start()
+
+    public override void OnStartClient()
     {
+        base.OnStartClient();
+
+        if (!isLocalPlayer) return;
         InputManager.Instance.OnMovement += _move;
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        if (!isLocalPlayer) return;
+        InputManager.Instance.OnMovement -= _move;
     }
     private void _move(float hor,float ver)
     {

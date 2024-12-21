@@ -1,8 +1,9 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : NetworkBehaviour
 {
     private Interactable _seenInteractable;
     [SerializeField] private CapsuleCollider _capsuleCollider;
@@ -25,10 +26,22 @@ public class PlayerInteraction : MonoBehaviour
     }
     public bool CanInterract { get { return _interractLockers.Count == 0; } }
 
-    private void Start()
+    public override void OnStartClient()
     {
+        base.OnStartClient();
+
+        if (!isLocalPlayer) return;
         InputManager.Instance.OnPressF += _interract;
         InputManager.Instance.OnUnPressF += _stopInterract;
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        if (!isLocalPlayer) return;
+        InputManager.Instance.OnPressF -= _interract;
+        InputManager.Instance.OnUnPressF -= _stopInterract;
     }
     void Update()
     {
