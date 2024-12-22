@@ -83,12 +83,14 @@ public class Wheel : NetworkBehaviour, Interactable
             _playerDir.Remove(player);
             _stopPlayerHold(player.connectionToClient);
             player.transform.SetParent(null);
+            player.GetComponent<Rigidbody>().isKinematic = false;
         }
         else
         {
             _playerDir[player] = 0;
             _startPlayerHold(player.connectionToClient);
             player.transform.SetParent(transform);
+            player.GetComponent<Rigidbody>().isKinematic = true;
         }
         
     }
