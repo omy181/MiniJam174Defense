@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{ff6e7b30-6255-438e-9bbd-e60fef7319d8}">
+		<property name="assetPath">
+			<value>SFX/Prop/ShopDoor.mp3.meta</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e2f34016-e9b6-4406-89a8-eb107b0d9c3d}</destination>
+		</relationship>
+	</object>
+</objects>
