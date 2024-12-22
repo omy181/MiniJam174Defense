@@ -9,6 +9,7 @@ public class DeviceManager : Singleton<DeviceManager>
     public Device BottomShield;
     public Device Heater;
     public Device Thruster;
+    public Device GameStarter;
 
     private Dictionary<int, Device> _angleToDevice = new();
     private Device _currentOnDevice;
@@ -19,6 +20,7 @@ public class DeviceManager : Singleton<DeviceManager>
         _angleToDevice.Add(360, Thruster);
         _angleToDevice.Add(0, Thruster);
         _angleToDevice.Add(180, Heater);
+        _angleToDevice.Add(30, GameStarter);
     }
 
 
