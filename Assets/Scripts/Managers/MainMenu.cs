@@ -11,16 +11,18 @@ public class MainMenu : MonoBehaviour
     }
     public void PlaySinglePlayer()
     {
-        Host();
+        PlayerManager.instance._networkManager.StartHost();
+        WindowManager.instance.CloseWindows();
     }
 
     public void Host()
     {
+        PlayerManager.instance._networkManager.StartHost();
         WindowManager.instance.CloseWindows();
     }
 
     public void Join()
     {
-
+        PlayerManager.instance._networkManager.StartClient();
     }
 }

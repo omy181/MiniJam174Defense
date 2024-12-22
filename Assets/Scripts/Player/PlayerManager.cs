@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    [SerializeField] private NetworkManager _networkManager;
+    public NetworkManager _networkManager;
 
     public Player LocalePlayer { get; set; }
     public int PlayerCount => _networkManager.numPlayers;
