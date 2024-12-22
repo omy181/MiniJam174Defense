@@ -108,11 +108,11 @@ public class PlayerInteraction : NetworkBehaviour
             _seenInteractable.StopInterract(player); 
         }
 
-        _rpcStopInterract(player);
+        _rpcStopInterract(connectionToClient,player);
         player.Movement.RpcStopPlayerAnimation();
     }
 
-    [ClientRpc] private void _rpcStopInterract(Player player)
+    [TargetRpc] private void _rpcStopInterract(NetworkConnectionToClient target, Player player)
     {
         InputManager.Instance.SetInputLock(player, false);
     }
