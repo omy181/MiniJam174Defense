@@ -95,6 +95,11 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         AttentionManager.instance.HideAttention(this);
     }
 
+    [ClientRpc] public void RpcReset()
+    {
+        _fix();
+    }
+
     public bool IsInteractable(Player player)
     {
         return !isFixed;

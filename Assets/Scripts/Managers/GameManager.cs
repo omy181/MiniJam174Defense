@@ -24,6 +24,17 @@ public class GameManager : NetworkSingleton<GameManager>
         Application.targetFrameRate = 60;
     }
 
+    [Command(requiresAuthority =false)] public void CmdResetGame()
+    {
+        ShipManager.instance.ResetStats();
+        _rpcReset();
+    }
+
+    [ClientRpc] private void _rpcReset()
+    {
+        _gameOverScreen.HideScreen();
+    }
+
     public void StartGame()
     {
         if (_isgameRunning) return;

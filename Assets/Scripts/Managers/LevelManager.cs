@@ -9,7 +9,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public void RestartLevel()
     {
-        SpesificLevel(SceneManager.GetActiveScene().buildIndex);
+        GameManager.instance.CmdResetGame();
+        //SpesificLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void SpesificLevel(int index)

@@ -93,6 +93,16 @@ public class ShipManager : NetworkSingleton<ShipManager>
         _metalPanels = FindObjectsOfType<MetalPanel>().ToList();
     }
 
+    [Server] public void ResetStats()
+    {
+        Road = 0 ; Health = 1; Heat = 1;
+
+        foreach (var panel in _metalPanels)
+        {
+            panel.RpcReset();
+        }
+    }
+
     void Update()
     {
         if(isServer)

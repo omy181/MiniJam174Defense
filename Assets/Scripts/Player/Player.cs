@@ -11,16 +11,18 @@ public class Player : NetworkBehaviour
     [SerializeField] private PlayerMovement _playerMovement;
     public PlayerMovement Movement => _playerMovement;
 
-    public override void OnStartLocalPlayer()
+    public override void OnStartClient()
     {
-        base.OnStartLocalPlayer();
+        base.OnStartClient();
 
+        if(isLocalPlayer)
         PlayerManager.instance.SetLocalePlayer(this);
     }
 
     public override void OnStopClient()
     {
-        PlayerManager.instance.SetLocalePlayer(null);
+        if (isLocalPlayer)
+            PlayerManager.instance.SetLocalePlayer(null);
     }
 
 }

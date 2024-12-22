@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,11 +21,16 @@ public class GameOverScreen : MonoBehaviour
         _panel.gameObject.SetActive(true);
         if (isWin)
         {
-            _titleText.text = "You Reached Your Destination!";
+            _titleText.text = "You Did it !";
         }
         else
         {
             _titleText.text = "You Couldn't Reached Your Destination";
         }
+    }
+
+    public void HideScreen()
+    {
+        _panel.gameObject.SetActive(false);
     }
 }
