@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ public class ShipManager : NetworkSingleton<ShipManager>
     private void _onHealthChanged(float oldHealth, float newHealth)
     {
         _healthSlider.value = newHealth;
+
+        if (newHealth < 0.5f && oldHealth >= 0.5f)
+        {
+            HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.HealthWarning, Vector3.zero);
+        }
     }
 
     [SyncVar(hook = nameof(_onRoadChanged))] private float _road;
@@ -52,6 +58,7 @@ public class ShipManager : NetworkSingleton<ShipManager>
     private void _onRoadChanged(float oldRoad, float newRoad)
     {
         _roadSlider.value = newRoad;
+
     }
 
     [SyncVar(hook = nameof(_onHeatChanged))] private float _heat;
@@ -72,6 +79,11 @@ public class ShipManager : NetworkSingleton<ShipManager>
     private void _onHeatChanged(float oldHeat,float newHeat)
     {
         _heatSlider.value = newHeat;
+
+        if(newHeat < 0.5f && oldHeat >= 0.5f)
+        {
+            HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.FireWarning,Vector3.zero);
+        }
     }
 
     //                      electrycity bar da ekle, bisiklet cevirdikce biriksin
@@ -84,6 +96,8 @@ public class ShipManager : NetworkSingleton<ShipManager>
     public float MetalPanelBrokenPercent => _metalPanels.Sum(p=>!p.isFixed?1:0)/ _metalPanels.Count;
     public bool IsThrusterActive => _thruster.Power;
 
+
+
     private void Start()
     {
         Road = 0;
@@ -91,6 +105,7 @@ public class ShipManager : NetworkSingleton<ShipManager>
         Heat = 1;
 
         _metalPanels = FindObjectsOfType<MetalPanel>().ToList();
+
     }
 
     [Server] public void ResetStats()
