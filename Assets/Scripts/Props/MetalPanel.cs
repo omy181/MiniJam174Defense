@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         _lockPlayer(player.connectionToClient,player,true);
         _fixing = true;
         _timer = _fixTime;
-
+        _rpcPlaySound();
         player.Movement.RpcRepairPlayer();
     }
 
@@ -36,7 +37,18 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         _lockPlayer(player.connectionToClient, player, false);
         _fixing = false;
 
+        _rpcStopSound();
         player.Movement.RpcStopPlayerAnimation();
+    }
+
+    [ClientRpc]
+    private void _rpcPlaySound()
+    {
+        _repairInstance.start();
+    }
+    [ClientRpc] private void _rpcStopSound()
+    {
+        _repairInstance.stop(STOP_MODE.IMMEDIATE);
     }
 
     private void Update()
@@ -57,6 +69,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
 
     void Start()
     {
+        _repairInstance = HolyFmodAudioController.CreateEventInstance(HolyFmodAudioReferences.instance.Repair);
         _fix();
         if (!isServer) return;
         GameManager.instance.AddEvent(this);
@@ -90,6 +103,8 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
     {
         _fix();
     }
+
+    private EventInstance _repairInstance;
 
     private void _fix()
     {

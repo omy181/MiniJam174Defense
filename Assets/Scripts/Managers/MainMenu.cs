@@ -2,11 +2,11 @@ using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Window _mainMenu;
+    [SerializeField] private GameObject _tutorial;
 
     private EventInstance _inGameMusic;
     private EventInstance _gameMusicStatus;
@@ -18,6 +18,14 @@ public class MainMenu : MonoBehaviour
         _inGameMusic.start();
 
         //_gameMusicStatus = HolyFmodAudioController.CreateEventInstance(HolyFmodAudioReferences.instance.GameMusicStatus);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _tutorial.gameObject.SetActive(false);
+        }
     }
 
     public void SetMusicGameStarted()

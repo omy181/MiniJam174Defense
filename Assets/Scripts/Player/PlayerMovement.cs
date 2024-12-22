@@ -52,7 +52,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         _animation.clip = _repairAnimation;
         _animation.Play();
-        HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.Repair, Vector3.zero);
     }
 
     [Command] public void CMDStopPlayerAnimation()

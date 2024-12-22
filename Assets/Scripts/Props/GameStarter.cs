@@ -22,8 +22,9 @@ public class GameStarter : Device
        
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         _tutorial.gameObject.SetActive(!GameManager.instance.IsGameRunning && !Power);
     }
 }

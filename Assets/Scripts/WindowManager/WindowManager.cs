@@ -6,15 +6,27 @@ public class WindowManager : Singleton<WindowManager>
 
     public Window _mainMenu;
 
+    public bool PreviousWindow()
+    {
+        return _previousWindow != null;
+    }
+
     public void OpenWindow(Window window)
     {
-        if (_currentWindow == window) return;
+        TryOpenWindow(window);
+    }
+
+    public bool TryOpenWindow(Window window)
+    {
+        if (_currentWindow == window) return false;
 
         _previousWindow = _currentWindow;
         _currentWindow = window;
 
         _previousWindow?.Deactivate();
         _currentWindow?.Activate();
+
+        return true;
     }
 
     public void OpenPreviousWindow()

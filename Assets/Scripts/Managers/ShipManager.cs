@@ -34,9 +34,10 @@ public class ShipManager : NetworkSingleton<ShipManager>
     {
         _healthSlider.value = newHealth;
 
-        if (newHealth < 0.5f && oldHealth >= 0.5f)
+        if (newHealth < 0.5f)
         {
             HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.HealthWarning, Vector3.zero);
+            WarningManager.instance.SendWarning();
         }
     }
 
@@ -83,6 +84,7 @@ public class ShipManager : NetworkSingleton<ShipManager>
         if(newHeat < 0.5f && oldHeat >= 0.5f)
         {
             HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.FireWarning,Vector3.zero);
+
         }
     }
 

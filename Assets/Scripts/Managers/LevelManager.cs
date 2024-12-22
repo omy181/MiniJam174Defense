@@ -20,11 +20,16 @@ public class LevelManager : Singleton<LevelManager>
 
     private void _openPauseMenu()
     {
-        WindowManager.instance.OpenWindow(_pauseMenu);
+
+        if (!WindowManager.instance.PreviousWindow()&& !WindowManager.instance.TryOpenWindow(_pauseMenu))
+        {
+            WindowManager.instance.CloseWindows();
+        }
     }
 
     public void QuitToMenu()
     {
+
         PlayerManager.instance._networkManager.StopClient();
         PlayerManager.instance._networkManager.StopHost();
 

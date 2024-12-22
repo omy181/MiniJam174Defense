@@ -9,8 +9,9 @@ public class ThrusterDevice : Device
     [SerializeField] private ParticleSystem _fire;
     private EventInstance _thrusterInstance;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _thrusterInstance = HolyFmodAudioController.CreateEventInstance(HolyFmodAudioReferences.instance.Thruster);
     }
     protected override void _onPowerOff()

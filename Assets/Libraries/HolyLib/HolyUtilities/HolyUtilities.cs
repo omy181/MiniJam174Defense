@@ -131,15 +131,15 @@ namespace Holylib.Utilities
             return Resources.LoadAll<T>(folderPath).ToList();
         }
 
-        public static void ChangeMaterialColor(MeshRenderer renderer, Color color)
+        public static void ChangeMaterialColor(MeshRenderer renderer, Color color, int material_index = 0)
         {
             MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
 
-            renderer.GetPropertyBlock(propertyBlock);
+            renderer.GetPropertyBlock(propertyBlock, material_index);
 
             propertyBlock.SetColor("_BaseColor", color);
 
-            renderer.SetPropertyBlock(propertyBlock);
+            renderer.SetPropertyBlock(propertyBlock, material_index);
         }
     }
 }

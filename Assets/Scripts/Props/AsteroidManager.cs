@@ -8,23 +8,23 @@ public class AsteroidManager : Singleton<AsteroidManager>
 {
     [SerializeField] private GameObject _asteroidOBJ;
 
-    private GameObject _sendAsteroid(Vector3 pos, Vector3 des)
+    private GameObject _sendAsteroid(Vector3 pos, Vector3 des,Vector3 rot)
     {
         HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.MeteorWarning,des);
-        var obj = Instantiate(_asteroidOBJ,pos,Quaternion.identity);
+        var obj = Instantiate(_asteroidOBJ,pos,Quaternion.Euler(rot));
         obj.GetComponent<Asteroid>().Initialize(pos,des);
         return obj;
     }
 
     public void SendAsteroidToTop()
     {       
-        var asteroid = _sendAsteroid(new Vector3(0,0,-60), new Vector3(0, 0, -15));
+        var asteroid = _sendAsteroid(new Vector3(0,0,-60), new Vector3(0, 0, -15),new Vector3(0,0,0));
         AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, -10));
     }
 
     public void SendAsteroidToBottom()
     {
-        var asteroid = _sendAsteroid(new Vector3(0, 0, 60), new Vector3(0, 0, 15));
+        var asteroid = _sendAsteroid(new Vector3(0, 0, 60), new Vector3(0, 0, 15), new Vector3(0, 180, 0));
         AttentionManager.instance.ShowAttention(asteroid, new Vector3(0, 2, 10));
     }
 

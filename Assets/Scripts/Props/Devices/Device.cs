@@ -8,11 +8,11 @@ public abstract class Device : NetworkBehaviour
     private bool _power;
     public bool Power => _power;
 
-    private void Start()
+    protected virtual void Start()
     {
         _onPowerOff();
     }
-    private void Update()
+    protected virtual void Update()
     {
         if(_power)
             _run();
