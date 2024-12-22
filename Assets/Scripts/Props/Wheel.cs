@@ -12,6 +12,8 @@ public class Wheel : NetworkBehaviour, Interactable
     private Dictionary<Player, int> _playerDir = new();
     private int _dir => _playerDir.Sum(p=>p.Value);
 
+    [SerializeField] private GameObject _wheelControls;
+
     private void Update()
     {
         _updateState();
@@ -97,26 +99,30 @@ public class Wheel : NetworkBehaviour, Interactable
     {
         InputManager.Instance.SetInputLock(this, true);
 
-        InputManager.Instance.OnPressA += _changeDirMinus;
-        InputManager.Instance.OnUnPressA += _changeDirPlus;
+        InputManager.Instance.OnPressQ += _changeDirMinus;
+        InputManager.Instance.OnUnPressQ += _changeDirPlus;
 
-        InputManager.Instance.OnPressD += _changeDirPlus;
-        InputManager.Instance.OnUnPressD += _changeDirMinus;
+        InputManager.Instance.OnPressE += _changeDirPlus;
+        InputManager.Instance.OnUnPressE += _changeDirMinus;
 
         PlayerManager.instance.LocalePlayer.transform.SetParent(transform);
+
+        _wheelControls.SetActive(true);
     }
 
     [TargetRpc] private void _stopPlayerHold(NetworkConnectionToClient target)
     {
         InputManager.Instance.SetInputLock(this, false);
 
-        InputManager.Instance.OnPressA -= _changeDirMinus;
-        InputManager.Instance.OnUnPressA -= _changeDirPlus;
+        InputManager.Instance.OnPressQ -= _changeDirMinus;
+        InputManager.Instance.OnUnPressQ -= _changeDirPlus;
 
-        InputManager.Instance.OnPressD -= _changeDirPlus;
-        InputManager.Instance.OnUnPressD -= _changeDirMinus;
+        InputManager.Instance.OnPressE -= _changeDirPlus;
+        InputManager.Instance.OnUnPressE -= _changeDirMinus;
 
         PlayerManager.instance.LocalePlayer.transform.SetParent(null);
+
+        _wheelControls.SetActive(false);
     }
 
     private void _changeDirMinus()

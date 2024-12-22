@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AttentionManager : Singleton<AttentionManager>
@@ -18,8 +19,9 @@ public class AttentionManager : Singleton<AttentionManager>
 
         if (isRepair)
         {
-            obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _repairIcon;
+            obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _repairIcon;          
         }
+
 
         obj.LeanMoveLocalY(obj.transform.localPosition.y + 1f, 1f).setEaseInCirc().setLoopPingPong();
 
