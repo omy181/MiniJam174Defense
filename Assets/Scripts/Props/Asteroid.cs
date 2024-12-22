@@ -7,7 +7,7 @@ public class Asteroid : MonoBehaviour
     private Vector3 _destiny;
     private Vector3 _start;
     private float _progress;
-    private float _reachTime = 10;
+    private float _reachTime = 5;
     public void Initialize(Vector3 start,Vector3 des)
     {
         _start = start;
