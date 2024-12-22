@@ -12,7 +12,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
     public bool isFixed => _isFixed;
 
     private float _timer;
-    private float _fixTime = 1.5f;
+    private float _fixTime = 3f;
     private bool _fixing;
 
     public void Interract(Player player)
