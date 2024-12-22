@@ -17,13 +17,15 @@ public class MainMenu : MonoBehaviour
 
     public void Host()
     {
-        PlayerManager.instance._networkManager.StartHost();
+        //PlayerManager.instance._networkManager.StartHost();
+        SteamLobby.instance.HostLobby();
         WindowManager.instance.CloseWindows();
     }
 
     public void Join()
     {
-        PlayerManager.instance._networkManager.StartClient();
+        //PlayerManager.instance._networkManager.StartClient();
+        
         WindowManager.instance.CloseWindows();
     }
 }

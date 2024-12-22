@@ -7600,7 +7600,7 @@ PrefabInstance:
     - target: {fileID: 8026051438409067044, guid: 14fa9404b4ca34c4681145d94b6ab6d2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.33776855
+      value: 0.33789062
       objectReference: {fileID: 0}
     - target: {fileID: 8026051438409067044, guid: 14fa9404b4ca34c4681145d94b6ab6d2,
         type: 3}
@@ -14502,6 +14502,7 @@ GameObject:
   - component: {fileID: 1268900648}
   - component: {fileID: 1268900649}
   - component: {fileID: 1268900650}
+  - component: {fileID: 1268900651}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -14646,6 +14647,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _asteroidOBJ: {fileID: 3370116507119763461, guid: 64493360cf78567499a44699f66efe65,
     type: 3}
+--- !u!114 &1268900651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268900637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67932501c0c11a94896d415e8d7cf1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLobbyID: 0
 --- !u!1001 &1285762221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20424,8 +20438,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1713029762}
-  - component: {fileID: 1713029760}
   - component: {fileID: 1713029764}
+  - component: {fileID: 1713029765}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -20433,30 +20447,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1713029760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1713029758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  port: 7777
-  NoDelay: 1
-  SendTimeout: 5000
-  ReceiveTimeout: 30000
-  serverMaxMessageSize: 16384
-  serverMaxReceivesPerTick: 10000
-  serverSendQueueLimitPerConnection: 10000
-  serverReceiveQueueLimitPerConnection: 10000
-  clientMaxMessageSize: 16384
-  clientMaxReceivesPerTick: 1000
-  clientSendQueueLimit: 10000
-  clientReceiveQueueLimit: 10000
 --- !u!4 &1713029762
 Transform:
   m_ObjectHideFlags: 0
@@ -20492,7 +20482,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   offlineSceneLoadDelay: 0
-  transport: {fileID: 1713029760}
+  transport: {fileID: 0}
   networkAddress: localhost
   maxConnections: 4
   disconnectInactiveConnections: 0
@@ -20519,6 +20509,22 @@ MonoBehaviour:
   evaluationInterval: 3
   timeInterpolationGui: 0
   _playerStartPos: {fileID: 2026433756}
+--- !u!114 &1713029765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713029758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
 --- !u!1 &1762241511
 GameObject:
   m_ObjectHideFlags: 0
@@ -22281,7 +22287,7 @@ PrefabInstance:
     - target: {fileID: 8026051438409067044, guid: 14fa9404b4ca34c4681145d94b6ab6d2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.33776855
+      value: 0.33789062
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
