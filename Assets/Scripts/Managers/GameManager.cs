@@ -35,6 +35,14 @@ public class GameManager : NetworkSingleton<GameManager>
         _gameOverScreen.HideScreen();
     }
 
+    public void StopGameForMe()
+    {
+        _isgameRunning = false;
+        if(_eventroutine != null) StopCoroutine(_eventroutine);
+        ShipManager.instance.ResetStatsForMe();
+        _gameOverScreen.HideScreen();
+    }
+
     public void StartGame()
     {
         if (_isgameRunning) return;
@@ -46,9 +54,11 @@ public class GameManager : NetworkSingleton<GameManager>
     private void _cmdStartGame()
     {
         _isgameRunning = true;
-        StartCoroutine(_runEvents());
+
+        _eventroutine=StartCoroutine(_runEvents());
     }
 
+    private Coroutine _eventroutine;
     private IEnumerator _runEvents()
     {
         yield return new WaitForSeconds(1);

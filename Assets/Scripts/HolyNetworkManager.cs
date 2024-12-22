@@ -35,7 +35,7 @@ public class HolyNetworkManager : NetworkManager
     {
         base.OnServerDisconnect(conn);
 
-        TextManager.instance.ShowText($"{conn.identity.GetComponent<PlayerInfoDisplay>().PlayerName} Disconnected", 4, Color.red);
+        //TextManager.instance.ShowText($"{conn.identity.GetComponent<PlayerInfoDisplay>().PlayerName} Disconnected", 4, Color.red);
     }
 
     public override void OnClientDisconnect()

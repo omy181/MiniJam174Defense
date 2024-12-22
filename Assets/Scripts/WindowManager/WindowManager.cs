@@ -4,6 +4,8 @@ public class WindowManager : Singleton<WindowManager>
     private Window _previousWindow;
     private Window _currentWindow;
 
+    public Window _mainMenu;
+
     public void OpenWindow(Window window)
     {
         if (_currentWindow == window) return;
@@ -24,5 +26,8 @@ public class WindowManager : Singleton<WindowManager>
     {
         _previousWindow?.Deactivate();
         _currentWindow?.Deactivate();
+
+        _currentWindow = null;
+        _previousWindow = null;
     }
 }

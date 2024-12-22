@@ -103,6 +103,16 @@ public class ShipManager : NetworkSingleton<ShipManager>
         }
     }
 
+    public void ResetStatsForMe()
+    {
+        Road = 0; Health = 1; Heat = 1;
+
+        foreach (var panel in _metalPanels)
+        {
+            panel.ResetForMe();
+        }
+    }
+
     void Update()
     {
         if(isServer)

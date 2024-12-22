@@ -100,6 +100,12 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         _fix();
     }
 
+
+    public void ResetForMe()
+    {
+        _fix();
+    }
+
     public bool IsInteractable(Player player)
     {
         return !isFixed;
