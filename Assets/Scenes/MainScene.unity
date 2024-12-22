@@ -14274,6 +14274,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   _gameOverScreen: {fileID: 1174225508}
+  _mainmenu: {fileID: 1268900648}
 --- !u!114 &775096080
 MonoBehaviour:
   m_ObjectHideFlags: 0
