@@ -80,10 +80,7 @@ public class Wheel : NetworkBehaviour, Interactable
     [Server] public void Interract(Player player)
     {
         if (_playerDir.ContainsKey(player)) {
-            _playerDir.Remove(player);
-            _stopPlayerHold(player.connectionToClient);
-            player.transform.SetParent(null);
-            player.GetComponent<Rigidbody>().isKinematic = false;
+
         }
         else
         {
@@ -96,7 +93,6 @@ public class Wheel : NetworkBehaviour, Interactable
     }
 
 
-
     [TargetRpc] private void _startPlayerHold(NetworkConnectionToClient target)
     {
         InputManager.Instance.SetInputLock(this, true);
@@ -107,13 +103,18 @@ public class Wheel : NetworkBehaviour, Interactable
         InputManager.Instance.OnPressE += _changeDirPlus;
         InputManager.Instance.OnUnPressE += _changeDirMinus;
 
+        InputManager.Instance.OnPressF += _stopPlayerHold;
+
         PlayerManager.instance.LocalePlayer.transform.SetParent(transform);
 
         _wheelControls.SetActive(true);
     }
 
-    [TargetRpc] private void _stopPlayerHold(NetworkConnectionToClient target)
+     [Client]private void _stopPlayerHold()
     {
+
+        InputManager.Instance.OnPressF -= _stopPlayerHold;
+
         InputManager.Instance.SetInputLock(this, false);
 
         InputManager.Instance.OnPressQ -= _changeDirMinus;
@@ -125,6 +126,15 @@ public class Wheel : NetworkBehaviour, Interactable
         PlayerManager.instance.LocalePlayer.transform.SetParent(null);
 
         _wheelControls.SetActive(false);
+
+        CmdPlayerStopped(PlayerManager.instance.LocalePlayer);
+    }
+
+    [Command(requiresAuthority =false)] private void CmdPlayerStopped(Player player)
+    {
+        _playerDir.Remove(player);
+        player.transform.SetParent(null);
+        player.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     private void _changeDirMinus()
