@@ -59,7 +59,7 @@ public class PlayerInteraction : NetworkBehaviour
 
         foreach (var collider in colliders)
         {
-            if (collider.TryGetComponent(out Interactable interactable) /*&& interactable.IsInteractable(_player)*/)
+            if (collider.TryGetComponent(out Interactable interactable) && interactable.IsInteractable(_player))
             {
                 if(isLocalPlayer) InteractionUIManager.instance.EnableInteraction(collider.transform.position + new Vector3(0,2,0));
                 _seenInteractable = interactable;
@@ -94,18 +94,26 @@ public class PlayerInteraction : NetworkBehaviour
 
     [Command(requiresAuthority = false)] private void _cmdInterract(Player player)
     {
-        _seenInteractable.Interract(player);
+        if (_seenInteractable != null && _seenInteractable.IsInteractable(_player)) _seenInteractable.Interract(player);
     }
 
     private void _stopInterract()
     {
-        if (_seenInteractable != null) { 
-            _cmdStopInterract(_player); 
-        } 
+        _cmdStopInterract(_player); 
     }
 
     [Command(requiresAuthority = false)] private void _cmdStopInterract(Player player)
     {
-        _seenInteractable.StopInterract(player);
+        if (_seenInteractable != null) { 
+            _seenInteractable.StopInterract(player); 
+        }
+
+        _rpcStopInterract(player);
+        player.Movement.RpcStopPlayerAnimation();
+    }
+
+    [ClientRpc] private void _rpcStopInterract(Player player)
+    {
+        InputManager.Instance.SetInputLock(player, false);
     }
 }

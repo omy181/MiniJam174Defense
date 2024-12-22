@@ -11,6 +11,6 @@ public class ButtonSFX : MonoBehaviour
     }
     public void PlaySFX()
     {
-        HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.UIClick2Sound, transform.position);
+        //HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.UIClick2Sound, transform.position);
     }
 }

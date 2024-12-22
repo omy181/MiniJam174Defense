@@ -10,11 +10,6 @@ public class PlayerManager : Singleton<PlayerManager>
     public Player LocalePlayer { get; set; }
     public int PlayerCount => _networkManager.numPlayers;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     public void SetLocalePlayer(Player player)
     {
         LocalePlayer = player;

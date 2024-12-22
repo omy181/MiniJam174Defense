@@ -27,31 +27,3 @@ public class AsteroidManager : Singleton<AsteroidManager>
     }
 
 }
-
-class AsteroidTopEvent : IngameEvent
-{
-    public float EventProbability()
-    {
-        return 0.3f;
-    }
-
-    [ClientRpc]
-    public void RpcActEvent()
-    {
-        AsteroidManager.instance.SendAsteroidToTop();
-    }
-}
-
-class AsteroidBottomEvent : IngameEvent
-{
-    public float EventProbability()
-    {
-        return 0.3f;
-    }
-
-    [ClientRpc]
-    public void RpcActEvent()
-    {
-        AsteroidManager.instance.SendAsteroidToBottom();
-    }
-}

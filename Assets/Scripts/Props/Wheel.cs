@@ -95,7 +95,7 @@ public class Wheel : NetworkBehaviour, Interactable
 
     [TargetRpc] private void _startPlayerHold(NetworkConnectionToClient target)
     {
-        InputManager.Instance.SetInputLock(PlayerManager.instance.LocalePlayer, true);
+        InputManager.Instance.SetInputLock(this, true);
 
         InputManager.Instance.OnPressA += _changeDirMinus;
         InputManager.Instance.OnUnPressA += _changeDirPlus;
@@ -108,7 +108,7 @@ public class Wheel : NetworkBehaviour, Interactable
 
     [TargetRpc] private void _stopPlayerHold(NetworkConnectionToClient target)
     {
-        InputManager.Instance.SetInputLock(PlayerManager.instance.LocalePlayer, false);
+        InputManager.Instance.SetInputLock(this, false);
 
         InputManager.Instance.OnPressA -= _changeDirMinus;
         InputManager.Instance.OnUnPressA -= _changeDirPlus;
