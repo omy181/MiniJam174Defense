@@ -3,19 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HolyFmodAudioReferences : MonoBehaviour
+public class HolyFmodAudioReferences : Singleton<HolyFmodAudioReferences>
 {
-    public static HolyFmodAudioReferences instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     [field: Header("References")]
     [field: Header("UI")]
     [field: SerializeField] public EventReference UIClickSound { get; private set; }
-    [field: SerializeField] public EventReference UIClick2Sound { get; private set; }
 
     [field: Header("Player")]
     [field: SerializeField] public EventReference ItemGetSound { get; private set; }
