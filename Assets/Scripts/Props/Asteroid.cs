@@ -48,6 +48,7 @@ public class Asteroid : MonoBehaviour
 
     private void _onCollidedWithShip()
     {
+        HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.Crash,Vector3.zero);
         ShipManager.instance.CollideWithAsteroid();
         CameraProps.instance.CamShake(0.3f);
         AttentionManager.instance.HideAttention(gameObject);

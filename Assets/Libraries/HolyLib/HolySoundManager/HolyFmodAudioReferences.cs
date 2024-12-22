@@ -18,6 +18,7 @@ public class HolyFmodAudioReferences : Singleton<HolyFmodAudioReferences>
     [field: SerializeField] public EventReference ActivateDevice { get; private set; }
     [field: SerializeField] public EventReference ElectricZap { get; private set; }
     [field: SerializeField] public EventReference Repair { get; private set; }
+    [field: SerializeField] public EventReference Crash { get; private set; }
 
     [field: Header("Music")]
 
