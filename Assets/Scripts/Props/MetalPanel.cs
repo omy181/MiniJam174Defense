@@ -70,7 +70,7 @@ public class MetalPanel : NetworkBehaviour,Interactable,IngameEvent
         _brokenModel.SetActive(true);
         _isFixed = false;
 
-        AttentionManager.instance.ShowAttention(this, transform.position);
+        AttentionManager.instance.ShowAttention(this, transform.position,true);
     }
 
     [Command(requiresAuthority =false)] private void _cmdFix()

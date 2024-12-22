@@ -8,13 +8,18 @@ public class AttentionManager : Singleton<AttentionManager>
     [SerializeField] private GameObject _prefab;
 
     private Dictionary<object, GameObject> _attentions = new();
-
-    public void ShowAttention(object self,Vector3 pos)
+    [SerializeField] private Sprite _repairIcon;
+    public void ShowAttention(object self,Vector3 pos,bool isRepair = false)
     {
         if (_attentions.ContainsKey(self)) return;
 
         var obj = Instantiate(_prefab, pos,Quaternion.identity);
         obj.transform.position = pos + new Vector3(0, 0.6f, 0);
+
+        if (isRepair)
+        {
+            obj.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _repairIcon;
+        }
 
         obj.LeanMoveLocalY(obj.transform.localPosition.y + 1f, 1f).setEaseInCirc().setLoopPingPong();
 
