@@ -60,6 +60,8 @@ public class SteamLobby : Singleton<SteamLobby>
 
         SteamMatchmaking.SetLobbyData(LobbyId, HostAddressKey, SteamUser.GetSteamID().ToString());
 
+        TextManager.instance.ShowText("Invite your friends via steam",4,Color.cyan);
+
         OpenInvitePanel();
     }
 
@@ -75,7 +77,8 @@ public class SteamLobby : Singleton<SteamLobby>
         if (NetworkServer.active) return;
 
         //ServerUI.instance.Connect();
-
+        TextManager.instance.ShowText("Connected", 2, Color.cyan);
+        WindowManager.instance.CloseWindows();
 
         CurrentLobbyID = callback.m_ulSteamIDLobby;
 

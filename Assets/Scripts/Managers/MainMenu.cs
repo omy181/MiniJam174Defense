@@ -25,7 +25,9 @@ public class MainMenu : MonoBehaviour
     public void Join()
     {
         //PlayerManager.instance._networkManager.StartClient();
-        
-        WindowManager.instance.CloseWindows();
+
+        //WindowManager.instance.CloseWindows();
+
+        TextManager.instance.ShowText("Accept your friends invite on steam",4,Color.cyan);
     }
 }

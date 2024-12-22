@@ -22,12 +22,12 @@ public class HolyNetworkManager : NetworkManager
 
         var steamId = SteamMatchmaking.GetLobbyMemberByIndex(SteamLobby.LobbyId, numPlayers - 1);
 
-        /*
+        
         var playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
 
         playerInfoDisplay.ConnectionID = conn.connectionId;
 
-        playerInfoDisplay.SetSteamId(steamId.m_SteamID);*/
+        playerInfoDisplay.SetSteamId(steamId.m_SteamID);
 
     }
 
@@ -35,20 +35,20 @@ public class HolyNetworkManager : NetworkManager
     {
         base.OnServerDisconnect(conn);
 
-        //TextManager.instance.ShowText($"{PlayerManager.instance.players[conn.connectionId].Name} Disconnected", 4, Color.red);
+        TextManager.instance.ShowText($"{conn.identity.GetComponent<PlayerInfoDisplay>().PlayerName} Disconnected", 4, Color.red);
     }
 
     public override void OnClientDisconnect()
     {
         base.OnClientDisconnect();
-        //TextManager.instance.ShowText("Disconnected from server", 4, Color.red);
+        TextManager.instance.ShowText("Disconnected from server", 4, Color.red);
     }
 
     public override void OnClientConnect()
     {
         base.OnClientConnect();
 
-        //TextManager.instance.ShowText("Connected to the server", 2, Color.green);
+        TextManager.instance.ShowText("Connected to the server", 2, Color.green);
 
 
     }
@@ -64,7 +64,7 @@ public class HolyNetworkManager : NetworkManager
         base.OnStopClient();
 
 
-        //TextManager.instance.ShowText("Disconnected from server", 4, Color.red);
+        TextManager.instance.ShowText("Disconnected from server", 4, Color.red);
     }
 
 }

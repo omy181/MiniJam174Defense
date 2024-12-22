@@ -9,6 +9,7 @@ public class PlayerInfoDisplay : NetworkBehaviour
 
     [SerializeField] private TMP_Text _playerName;
     //[SerializeField] private SpriteRenderer _playerSprite;
+    public string PlayerName => _playerName.text;
 
     [SyncVar(hook = nameof(_onConnectionIDUpdated))]
     public int ConnectionID;
