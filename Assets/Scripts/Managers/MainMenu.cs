@@ -24,5 +24,6 @@ public class MainMenu : MonoBehaviour
     public void Join()
     {
         PlayerManager.instance._networkManager.StartClient();
+        WindowManager.instance.CloseWindows();
     }
 }
