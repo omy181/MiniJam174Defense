@@ -14652,6 +14652,13 @@ MonoBehaviour:
       Data3: -46386284
       Data4: -294481740
     Path: event:/Repair
+  <Crash>k__BackingField:
+    Guid:
+      Data1: -313796326
+      Data2: 1192475885
+      Data3: -517031547
+      Data4: 590399502
+    Path: event:/Crash
   <GameMusicStatus>k__BackingField:
     Guid:
       Data1: 0
