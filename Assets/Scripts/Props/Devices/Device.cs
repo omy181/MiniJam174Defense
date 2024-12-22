@@ -24,6 +24,8 @@ public abstract class Device : NetworkBehaviour
     {
         _power = true;
         _onPowerOn();
+
+        HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.ActivateDevice,Vector3.zero);
     }
 
     protected virtual void _onPowerOn() { }

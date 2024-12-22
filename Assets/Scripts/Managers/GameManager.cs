@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameManager : NetworkSingleton<GameManager>
 {
     [SerializeField] private GameOverScreen _gameOverScreen;
+    [SerializeField] private MainMenu _mainmenu;
 
     [SyncVar] private bool _isgameRunning = false;
     public bool IsGameRunning => _isgameRunning;
@@ -33,6 +34,7 @@ public class GameManager : NetworkSingleton<GameManager>
     [ClientRpc] private void _rpcReset()
     {
         _gameOverScreen.HideScreen();
+        _mainmenu.SetMusicMainMenu();
     }
 
     public void StopGameForMe()
@@ -56,6 +58,13 @@ public class GameManager : NetworkSingleton<GameManager>
         _isgameRunning = true;
 
         _eventroutine=StartCoroutine(_runEvents());
+        _rpcStartGame();
+    }
+
+    [ClientRpc]
+    private void _rpcStartGame()
+    {
+        _mainmenu.SetMusicGameStarted();
     }
 
     private Coroutine _eventroutine;

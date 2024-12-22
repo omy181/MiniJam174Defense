@@ -1,3 +1,4 @@
+using Holylib.HolySoundEffects;
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public class AsteroidManager : Singleton<AsteroidManager>
 
     private GameObject _sendAsteroid(Vector3 pos, Vector3 des)
     {
+        HolyFmodAudioController.PlayOneShot(HolyFmodAudioReferences.instance.MeteorWarning,des);
         var obj = Instantiate(_asteroidOBJ,pos,Quaternion.identity);
         obj.GetComponent<Asteroid>().Initialize(pos,des);
         return obj;

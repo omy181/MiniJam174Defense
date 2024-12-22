@@ -10,6 +10,14 @@ public class HolyFmodAudioReferences : Singleton<HolyFmodAudioReferences>
     [field: Header("UI")]
     [field: SerializeField] public EventReference UIClickSound { get; private set; }
 
+    [field: Header("Props")]
+    [field: SerializeField] public EventReference MeteorWarning { get; private set; }
+    [field: SerializeField] public EventReference FireWarning { get; private set; }
+    [field: SerializeField] public EventReference HealthWarning { get; private set; }
+    [field: SerializeField] public EventReference Thruster { get; private set; }
+    [field: SerializeField] public EventReference ActivateDevice { get; private set; }
+    [field: SerializeField] public EventReference ElectricZap { get; private set; }
+    [field: SerializeField] public EventReference Repair { get; private set; }
 
     [field: Header("Music")]
 

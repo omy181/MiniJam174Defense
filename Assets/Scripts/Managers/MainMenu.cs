@@ -2,6 +2,7 @@ using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,6 +18,16 @@ public class MainMenu : MonoBehaviour
         _inGameMusic.start();
 
         //_gameMusicStatus = HolyFmodAudioController.CreateEventInstance(HolyFmodAudioReferences.instance.GameMusicStatus);
+    }
+
+    public void SetMusicGameStarted()
+    {
+        _inGameMusic.setParameterByName("Game Started", 1);
+    }
+
+    public void SetMusicMainMenu()
+    {
+        _inGameMusic.setParameterByName("Game Started", 0);
     }
     public void PlaySinglePlayer()
     {
